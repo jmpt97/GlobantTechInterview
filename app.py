@@ -29,7 +29,7 @@ SWAGGERUI_BLUEPRINT = get_swaggerui_blueprint(
     SWAGGER_URL,
     API_URL,
     config={
-        'app_name': "Precious stone Price Predictor"
+        'app_name': "GlobantTechnicalInterviewTest"
     }
 )
 app.register_blueprint(SWAGGERUI_BLUEPRINT, url_prefix=SWAGGER_URL)
@@ -46,12 +46,6 @@ def index():
 
 @app.route('/dephiringaboveavg', methods=["GET", "POST"])
 def aboveaverage():
-    """
-    Endpoint for predicting prices based on input data.
-
-    Returns:
-        JSON response indicating successful test.
-    """
     year_selection = request.form.get('year_selection')
     query = f'EXEC [dbo].[GetDepartmentsWithHiringAboveAverage] {year_selection}'
     df = pd.read_sql_query(query, engine)
@@ -60,12 +54,6 @@ def aboveaverage():
 
 @app.route('/numberemployee', methods=["GET", "POST"])
 def predict():
-    """
-    Endpoint for predicting prices based on input data.
-
-    Returns:
-        JSON response indicating successful test.
-    """
     year_selection = 2021 if request.form.get('year_selection') is None \
                             else request.form.get('year_selection')
     department_selection =  '' if request.form.get('department_Selection') is None \

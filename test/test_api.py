@@ -6,7 +6,7 @@ class TestAPI(unittest.TestCase):
     URL = "http://127.0.0.1:8080"
 
     def test_1_upload_file(self):
-        ok = open('test/hired_employees.csv', 'rb')
+        ok = open('test/data/hired_employees.csv', 'rb')
         headers = {
             'accept': 'application/json'
         }
