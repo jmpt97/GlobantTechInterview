@@ -46,24 +46,24 @@ def index():
 
 @app.route('/dephiringaboveavg', methods=["GET", "POST"])
 def aboveaverage():
-    year_selection = request.form.get('year_selection')
-    query = f'EXEC [dbo].[GetDepartmentsWithHiringAboveAverage] {year_selection}'
+    year_selection = int(request.form.get('Select Year'))
+    query = f'EXEC [dbo].[GetDepartmentsWithHiringAboveAverage] {year_selection}'    
     df = pd.read_sql_query(query, engine)    
     result = loads(df.to_json(orient="split"))    
     return dumps(result, indent=4)
 
 @app.route('/numberemployee', methods=["GET", "POST"])
-def predict():
-    year_selection = 2021 if request.form.get('year_selection') is None \
-                            else request.form.get('year_selection')
-    department_selection =  '' if request.form.get('department_Selection') is None \
-                            else request.form.get('department_Selection')
-    job_selection =  '' if request.form.get('job_Selection') is None \
-                            else request.form.get('job_Selection')
+def numberemployee():    
+    year_selection = 2021 if request.form.get('Select Year') is None \
+                            else request.form.get('Select Year')
+    department_selection =  '' if request.form.get('Select Department') is None \
+                            else request.form.get('Select Department')
+    job_selection =  '' if request.form.get('Select Job') is None \
+                            else request.form.get('Select Job')
     query = "EXEC [dbo].[GetQuarterlyHiringStatistics]" \
                    f"{year_selection},'{department_selection}','{job_selection}'"    
     df = pd.read_sql_query(query, engine)        
-    result = loads(df.to_json(orient="records"))
+    result = loads(df.to_json(orient="split"))
     return dumps(result, indent=4)
 
 @app.errorhandler(ValueError)
