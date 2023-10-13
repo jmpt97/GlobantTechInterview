@@ -1,0 +1,238 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Globant Technical Test",
+    "description": "API that Uploads and returns Valuble information",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "paths": {
+    "/upload_csv": {
+      "post": {
+        "summary": "Returns a simple greeting message.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "type": "string",
+            "name": "Select Table",
+            "description": "Select table to insert data",
+            "enum": ["departments", "hired_employees", "jobs"],
+            "example": "modded",
+            "required": true              
+          },
+          {
+            "name": "Upload File",
+            "in": "formData",
+            "type": "file",
+            "description": "Dataframe in csv Format for Inserting Value",
+            "required": true
+          },
+          {
+            "name": "Save File",
+            "in": "formData",
+            "type": "boolean",
+            "description": "True or False to upload File to DataBase",
+            "default": true,
+            "required": true
+          }
+          
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "columns": {
+                  "type": "array",
+                  "items":{
+                    "type": "string"
+                  }
+                },
+                "index": {
+                  "type": "array",
+                  "items":{
+                    "type": "integer"
+                  }
+                },
+                "data": {
+                  "type": "array",
+                  "items":{
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dephiringaboveavg": {
+      "post": {
+        "summary": "Returns a simple greeting message.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "type": "integer",
+            "name": "year_selection",
+            "description": "Select table to insert data",            
+            "example": "modded",
+            "required": true              
+          }
+          
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "columns": {
+                  "type": "array",
+                  "items":{
+                    "type": "string"
+                  }
+                },
+                "index": {
+                  "type": "array",
+                  "items":{
+                    "type": "integer"
+                  }
+                },
+                "data": {
+                  "type": "array",
+                  "items":{
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/numberemployee": {
+      "post": {
+        "summary": "Returns a simple greeting message.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "type": "integer",
+            "name": "year_selection",
+            "description": "Select table to insert data",            
+            "example": "modded",
+            "required": false              
+          },
+          {
+            "in": "formData",
+            "type": "string",
+            "name": "department_Selection",
+            "description": "* or Departments seperated by ';'",            
+            "example": "modded",
+            "required": false              
+          },
+          {
+            "in": "formData",
+            "type": "string",
+            "name": "job_Selection",
+            "description": "* or Jobs seperated by ';'",            
+            "example": "modded",
+            "required": false              
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "columns": {
+                  "type": "array",
+                  "items":{
+                    "type": "string"
+                  }
+                },
+                "index": {
+                  "type": "array",
+                  "items":{
+                    "type": "integer"
+                  }
+                },
+                "data": {
+                  "type": "array",
+                  "items":{
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions":{
+      "predict_type":{
+         "type":"object",
+          "example":{
+            "carat": 0.23,
+            "cut": "Ideal",
+            "color": "E",
+            "clarity": "SI2",
+            "depth": 61.5,
+            "table": 55,
+            "price": 326,
+            "x": 3.95,
+            "y": 3.98,
+            "z": 2.43
+          },
+         "properties":{
+          
+            "carat": {
+                "type": "number"
+            },
+            "cut": {
+                "type": "string"
+            },
+            "color": {
+                "type": "string"
+            },
+            "clarity": {
+                "type": "string"
+            },
+            "depth": {
+                "type": "number"
+            },
+            "table": {
+                "type": "integer"
+            },
+            "price": {
+                "type": "integer"
+            },
+            "x": {
+                "type": "number"
+            },
+            "y": {
+                "type": "number"
+            },
+            "z": {
+                "type": "number"
+            }
+        
+         }
+      }
+   }
+}
