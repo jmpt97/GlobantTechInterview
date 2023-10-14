@@ -1,12 +1,9 @@
 flask==2.2.2
 gunicorn==20.1.0
-joblib
 pandas
-scikit-learn==1.2.2
 flask-swagger
 flask-swagger-ui
 numpy
-pyspark
 Werkzeug==2.2.2
 pyodbc
 sqlalchemy
